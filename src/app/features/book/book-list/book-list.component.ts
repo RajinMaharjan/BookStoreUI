@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BookService } from '../services/book.service';
 import { BookListRequest } from '../models/book-list-request.model';
 import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-book-list',
@@ -13,7 +14,7 @@ export class BookListComponent implements OnInit{
   bookList:BookListRequest[] = [];
   url = environment.imageUrl;
   
-  constructor(private bookService:BookService){}
+  constructor(private bookService:BookService, public datePipe:DatePipe){}
 
   ngOnInit(): void {
     this.loadBooks();

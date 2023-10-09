@@ -14,9 +14,10 @@ export class BookService {
     private http:HttpClient
   ) { }
 
-  addBook(model:AddBookRequest):Observable<void>{
+  addBook(model:FormData):Observable<void>{
     return this.http.post<void>('https://localhost:7148/api/Books/addBook',model);
   }
+
   public getAllBook():Observable<any>{
     return this.http.get(`${environment.apiUrl}/${this.bookListUrl}`);
   }
