@@ -9,16 +9,26 @@ import { BookListRequest } from '../models/book-list-request.model';
   providedIn: 'root'
 })
 export class BookService {
-  bookListUrl = 'Books/getAllBooks';
   constructor(
     private http:HttpClient
   ) { }
 
   addBook(model:FormData):Observable<void>{
-    return this.http.post<void>('https://localhost:7148/api/Books/addBook',model);
+    return this.http.post<void>(`${environment.bookApiUrl}/addBook`,model);
   }
 
   public getAllBook():Observable<any>{
-    return this.http.get(`${environment.apiUrl}/${this.bookListUrl}`);
+    return this.http.get(`${environment.bookApiUrl}/getAllBooks`);
+  }
+  getBookByCategory(category:string):Observable<any>{
+    return this.http.get(`${environment.bookApiUrl}/booksByCategory/${category}`);
+  }
+
+  updateBook(model:FormData,id:string):Observable<void>{
+    return this.http.put<void>(`${environment.bookApiUrl}/updateBook/${id}`,model);
+  }
+
+  deleteBook(id:string):Observable<void>{
+    return this.http.delete<void>(`${environment.bookApiUrl}/deleteBook/${id}`);
   }
 }
