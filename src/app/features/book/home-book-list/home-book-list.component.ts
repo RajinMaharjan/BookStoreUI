@@ -19,6 +19,7 @@ export class HomeBookListComponent {
 
   title!:string;
   description!:string;
+  date!:string;
   constructor(private bookService:BookService, public datePipe:DatePipe, private userService:UserService, private router:Router){}
 
   ngOnInit(): void {
@@ -60,6 +61,7 @@ export class HomeBookListComponent {
   onView(index:number){
     this.title = this.bookList[index].title
     this.description = this.bookList[index].description;
+    this.date = this.bookList[index].yearPublished;
   }
   
 }

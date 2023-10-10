@@ -18,6 +18,7 @@ export class BookListSortedComponent implements OnInit{
 
   title!:string;
   description!:string;
+  date!:string;
   
   constructor(private bookService:BookService,private userService:UserService, public datePipe:DatePipe){}
 
@@ -67,6 +68,7 @@ export class BookListSortedComponent implements OnInit{
   onView(index:number){
     this.title = this.bookList[index].title
     this.description = this.bookList[index].description;
+    this.date = this.bookList[index].yearPublished;
   }
 
 }

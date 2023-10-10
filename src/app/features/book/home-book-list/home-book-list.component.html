@@ -73,6 +73,9 @@
           <p class="card-text">
             {{ description }}
           </p>
+          <p class="card-text">
+            <b>Published on:</b> {{ datePipe.transform(date, "yyyy-MM-dd") }}
+          </p>
         </div>
       </div>
       <div class="modal-footer">
