@@ -12,8 +12,9 @@ import { UserService } from '../../user/services/user.service';
 })
 export class HomeBookListComponent {
   bookList:BookListRequest[] = [];
+  filteredBookList:BookListRequest[]=[];
   url = environment.baseUrl;
-  
+  searchText!:string;
   constructor(private bookService:BookService, public datePipe:DatePipe, private userService:UserService){}
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class HomeBookListComponent {
   loadBooks(){
     this.bookService.getAllBook().subscribe((bookData:any) => {
       this.bookList = bookData.books;
+      this.filteredBookList=this.bookList;
       console.log(bookData);
     });
   }
@@ -39,6 +41,15 @@ export class HomeBookListComponent {
         console.log("Error occured",error);
       }
     });
+  }
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredBookList = this.bookList;
+    }
+  
+    this.filteredBookList = this.bookList.filter(
+      bookTitle => bookTitle?.title.toLowerCase().includes(text.toLowerCase())
+    );
   }
 
 }
