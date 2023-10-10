@@ -1,4 +1,4 @@
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<!-- <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col" *ngFor="let book of bookList">
     <div class="card">
       <img
@@ -29,6 +29,58 @@
           <div class="col-md-6">
             <div class="card-body">
               <button class="btn btn-success">Buy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="container-fluid">
+  <div class="mx-auto text-center" style="width: 40%">
+    <input
+      class="form-control me-2 mb-2"
+      type="text"
+      placeholder="Search"
+      #filter
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterResults(filter.value)"
+    />
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let book of filteredBookList; let i = index">
+      <div class="card">
+        <img
+          [src]="url + book.imageUrl"
+          class="card-img-top img-fluid"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card-body">
+                <p class="card-text">{{ book.author }}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <p class="card-text">Rs {{ book.price }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card-body">
+                <p class="card-text">Author</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <button class="btn btn-success" (click)="onBuyBook(book.id)">
+                  Buy
+                </button>
+              </div>
             </div>
           </div>
         </div>

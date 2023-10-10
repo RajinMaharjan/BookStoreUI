@@ -14,11 +14,6 @@ import { UserInterceptor } from './features/user/services/interceptor';
 import { DatePipe } from '@angular/common';
 import { HomeComponent } from './core/home/home.component';
 import { BookListModule } from './features/book/book-list/book-list.module';
-import { HomeBookListComponent } from './features/book/home-book-list/home-book-list.component';
-import { CategoryBookListComponent } from './features/book/category-book-list/category-book-list.component';
-import { BookListSortedComponent } from './features/book/book-list-sorted/book-list-sorted.component';
-import { UserProfileComponent } from './features/user/user-profile/user-profile.component';
-import { PurchasedBooksComponent } from './features/book/purchased-books/purchased-books.component';
 @NgModule({
   declarations: [
     AppComponent,
