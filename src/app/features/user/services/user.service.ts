@@ -51,4 +51,11 @@ export class UserService {
   public loginUser(model:LoginUser):Observable<JwtAuth>{
     return this.http.post<JwtAuth>(`${environment.userApiUrl}/login`,model);
   }
+
+  getAllUser():Observable<any>{
+    return this.http.get(`${environment.userApiUrl}/getAllUsers`);
+  }
+  deleteUser(id:string):Observable<void>{
+    return this.http.delete<void>(`${environment.userApiUrl}/deleteUser/${id}`);
+  }
 }

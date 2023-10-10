@@ -29,9 +29,6 @@ export class CategoryBookListComponent implements OnInit,OnDestroy{
         console.log(params['category']);
 
         this.category = params['category'];
-
-        //this.loadProject();
-
       },
 
     });

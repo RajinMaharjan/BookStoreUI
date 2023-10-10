@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/features/user/services/user.service';
 import { UserModel } from 'src/app/features/user/models/user.model';
+import { BookService } from 'src/app/features/book/services/book.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import { UserModel } from 'src/app/features/user/models/user.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
-  constructor(private userService:UserService, private router:Router){}
+  constructor(private userService:UserService, private router:Router, private bookService:BookService){}
   categoryArray = ["Fiction","Non-fiction","Mystery","Fantasy","Romance"]
   userData:UserModel = {
     id: '',
@@ -40,6 +41,17 @@ export class NavbarComponent implements OnInit{
     console.log("Category is ",this.categoryArray[index]);
   }
 
+  routeToSortByPricePage(sortBy:boolean){
+    if(sortBy){      
+      this.bookService.sort = true;
+      this.router.navigate(["/home/sort/price"]);
+      this.redirectTo("/home/sort/price");
+    }else{
+      this.bookService.sort = false;
+      this.router.navigate(["/home/sort/price"]);
+      this.redirectTo("/home/sort/price");
+    }
+  }
 
   logout(){
     this.userService.logout();

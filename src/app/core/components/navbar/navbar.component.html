@@ -3,7 +3,7 @@
     class="container-fluid navbar-light p-2"
     style="background-color: #e3f2fd"
   >
-    <a class="navbar-brand" href="#">Bookstore</a>
+    <a class="navbar-brand" href="#"><i class="bi bi-book"></i></a>
     <button
       class="navbar-toggler"
       type="button"
@@ -48,6 +48,21 @@
             </li>
           </ul>
         </li>
+        <li class="mx-3">
+          <i
+            class="bi bi-sort-numeric-down"
+            style="font-size: 1.5rem"
+            (click)="routeToSortByPricePage(true)"
+          ></i>
+        </li>
+        <li class="me-2">
+          <i
+            class="bi bi-sort-numeric-up"
+            style="font-size: 1.5rem"
+            (click)="routeToSortByPricePage(false)"
+          ></i>
+        </li>
+
         <li class="nav-item dropdown">
           <button
             class="nav-link dropdown-toggle"
@@ -60,7 +75,11 @@
             Admin
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">User List</a></li>
+            <li>
+              <a class="dropdown-item" routerLink="/home/admin/user-list"
+                >User List</a
+              >
+            </li>
             <li><hr class="dropdown-divider" /></li>
             <li>
               <a class="dropdown-item" routerLink="/home/admin/book-list"
@@ -91,17 +110,32 @@
         >
           {{ userData.firstName + " " + userData.lastName }}
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" style="min-width: auto">
           <li>
-            <button class="btn btn-primary" (click)="logout()">Logout</button>
+            <div class="mb-3">
+              <i
+                class="bi bi-box-arrow-in-right btn mx-4 px-4"
+                style="font-size: 1.5rem"
+                (click)="logout()"
+              ></i>
+            </div>
+            <div>
+              <i
+                class="bi bi-person-circle btn mx-4 px-4"
+                style="font-size: 1.5rem"
+                routerLink="/home/user/profile"
+              ></i>
+            </div>
+            <div>
+              <i
+                class="bi bi-shop btn mx-4 px-4"
+                style="font-size: 1.5rem"
+                routerLink="/home/user/purchased-book"
+              ></i>
+            </div>
           </li>
         </ul>
       </div>
-      <div></div>
-      <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
     </div>
   </div>
 </nav>

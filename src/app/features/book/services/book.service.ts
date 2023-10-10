@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AddBookRequest } from '../models/add-book-request.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BookListRequest } from '../models/book-list-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +10,8 @@ export class BookService {
   constructor(
     private http:HttpClient
   ) { }
+
+  sort:boolean = true;
 
   addBook(model:FormData):Observable<void>{
     return this.http.post<void>(`${environment.bookApiUrl}/addBook`,model);
@@ -30,5 +30,20 @@ export class BookService {
 
   deleteBook(id:string):Observable<void>{
     return this.http.delete<void>(`${environment.bookApiUrl}/deleteBook/${id}`);
+  }
+
+  getSortedBookAsc(){
+    return this.http.get(`${environment.bookApiUrl}/getAllBooksByPriceAscending`);
+  }
+  getSortedBookDesc(){
+    return this.http.get(`${environment.bookApiUrl}/getAllBooksByPriceDescending`);
+  }
+
+  purchaseBook(bId:string,uId:string){
+    const requestBody = {}
+    return this.http.post(`${environment.bookApiUrl}/purchaseBook/${bId}/${uId}`,requestBody);
+  }
+  getPurchasedBook(uId:string){
+    return this.http.get(`${environment.bookApiUrl}/purchasedBook/${uId}`);
   }
 }

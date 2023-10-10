@@ -1,5 +1,5 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col" *ngFor="let book of bookList; let i = index">
+  <div class="col" *ngFor="let book of bookList">
     <div class="card">
       <img
         [src]="url + book.imageUrl"
@@ -28,9 +28,7 @@
           </div>
           <div class="col-md-6">
             <div class="card-body">
-              <button class="btn btn-success" (click)="onBuyBook(book.id)">
-                Buy
-              </button>
+              <button class="btn btn-success">Buy</button>
             </div>
           </div>
         </div>

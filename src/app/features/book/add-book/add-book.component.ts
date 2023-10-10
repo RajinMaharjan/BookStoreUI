@@ -44,8 +44,9 @@ export class AddBookComponent{
     if(this.model.image){
       formData.append('image',this.model.image,this.model.image.name);
     }
-    this.uploadFormData(formData);
+    this.uploadFormData(formData);    
     this.router.navigate(['/home/admin/book-list']);
+    this.redirectTo('/home/admin/book-list');
   }
 
 
@@ -59,5 +60,15 @@ export class AddBookComponent{
         console.log("Error occured",error);
       }
     });
+  }
+
+  redirectTo(uri: string) {
+
+    this.router
+
+      .navigateByUrl('/', { skipLocationChange: true })
+
+      .then(() => this.router.navigate([uri]));
+
   }
 }
