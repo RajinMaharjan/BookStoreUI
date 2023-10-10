@@ -1,3 +1,8 @@
 .custom-dropdown-button::after {
     content: "\2026"; /* Unicode character for an ellipsis (three dots) */
   }
+  .icon-hover:hover {
+    background-color: rgb(201, 236, 201);
+    color: white;
+    cursor: pointer;
+  }

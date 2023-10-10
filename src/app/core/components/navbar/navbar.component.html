@@ -51,14 +51,14 @@
         <li class="mx-3">
           <i
             class="bi bi-sort-numeric-down"
-            style="font-size: 1.5rem"
+            style="font-size: 1.5rem; cursor: pointer"
             (click)="routeToSortByPricePage(true)"
           ></i>
         </li>
         <li class="me-2">
           <i
             class="bi bi-sort-numeric-up"
-            style="font-size: 1.5rem"
+            style="font-size: 1.5rem; cursor: pointer"
             (click)="routeToSortByPricePage(false)"
           ></i>
         </li>
@@ -90,7 +90,7 @@
         </li>
       </ul>
 
-      <div class="dropdown">
+      <div class="btn-group dropdown">
         <a
           class="nav-link dropdown-toggle"
           href="#"
@@ -100,26 +100,29 @@
         >
           {{ userData.firstName + " " + userData.lastName }}
         </a>
-        <ul class="dropdown-menu" style="min-width: auto">
+        <ul
+          class="dropdown-menu dropdown-menu-end mt-3"
+          style="min-width: auto"
+        >
           <li>
-            <div class="mb-3">
+            <div>
               <i
-                class="bi bi-box-arrow-in-right btn mx-4 px-4"
-                style="font-size: 1.5rem"
+                class="bi bi-box-arrow-in-right btn icon-hover"
+                style="font-size: 1.5rem; color: rgb(122, 8, 8)"
                 (click)="logout()"
               ></i>
             </div>
             <div>
               <i
-                class="bi bi-person-circle btn mx-4 px-4"
-                style="font-size: 1.5rem"
+                class="bi bi-person-circle btn icon-hover"
+                style="font-size: 1.5rem; color: rgb(1, 4, 46)"
                 routerLink="/home/user/profile"
               ></i>
             </div>
             <div>
               <i
-                class="bi bi-shop btn mx-4 px-4"
-                style="font-size: 1.5rem"
+                class="bi bi-shop btn icon-hover"
+                style="font-size: 1.5rem; color: rgb(5, 87, 112)"
                 routerLink="/home/user/purchased-book"
               ></i>
             </div>

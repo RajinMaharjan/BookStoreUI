@@ -14,9 +14,19 @@ import { Router } from '@angular/router';
 export class BookListComponent implements OnInit{
 
   bookList:BookListRequest[] = [];
-  
+  filteredBookList:BookListRequest[]=[];
   url = environment.baseUrl;
+  searchText!:string;
   selectedIndex:number=0;
+
+  title!:string;
+  description!:string;
+
+  //for pagination
+  first!:number;
+  rows:number = 10;
+  totalRecords!:number;
+  //
   
   constructor(private bookService:BookService, public datePipe:DatePipe, private router:Router){}
 
@@ -27,10 +37,21 @@ export class BookListComponent implements OnInit{
   loadBooks(){
     this.bookService.getAllBook().subscribe((bookData:any) => {
       this.bookList = bookData.books;
+      this.filteredBookList=this.bookList;
+      this.totalRecords = this.bookList.length + 1 ;
       console.log(bookData);
     });
   }
+  filterResults(text: string) {
+    if (!text) {
+      this.filteredBookList = this.bookList;
+    }
   
+    this.filteredBookList = this.bookList.filter(
+      bookTitle => bookTitle?.title.toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
   //For editing image
   model:AddBookRequest ={
     title:'',
@@ -113,6 +134,14 @@ export class BookListComponent implements OnInit{
       }
     });
   }
+
+  //To View
+  onView(index:number){
+    this.title = this.bookList[index].title
+    this.description = this.bookList[index].description;
+  }
+
+
 
   //To refresh page
   redirectTo(uri: string) {

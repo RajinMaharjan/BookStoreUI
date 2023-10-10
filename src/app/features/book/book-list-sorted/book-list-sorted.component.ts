@@ -15,6 +15,9 @@ export class BookListSortedComponent implements OnInit{
   filteredBookList:BookListRequest[]=[];
   url = environment.baseUrl;
   searchText!:string;
+
+  title!:string;
+  description!:string;
   
   constructor(private bookService:BookService,private userService:UserService, public datePipe:DatePipe){}
 
@@ -53,11 +56,17 @@ export class BookListSortedComponent implements OnInit{
     this.bookService.purchaseBook(bId,uId).subscribe({
       next: (response) => {
         console.log("Successful!!!",response);
+        this.loadBooks(this.bookService.sort);
       },
       error: (error) => {
         console.log("Error occured",error);
       }
     });
+  }
+  //To View
+  onView(index:number){
+    this.title = this.bookList[index].title
+    this.description = this.bookList[index].description;
   }
 
 }
