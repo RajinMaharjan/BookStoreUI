@@ -27,6 +27,10 @@ export class CategoryBookListComponent implements OnInit,OnDestroy{
   
   private subscription!:Subscription;
   category!:string;
+
+  title!:string;
+  description!:string;
+
   ngOnInit(): void {
 
     this.subscription = this.route.params.subscribe({
@@ -71,11 +75,17 @@ export class CategoryBookListComponent implements OnInit,OnDestroy{
     this.bookService.purchaseBook(bId,uId).subscribe({
       next: (response) => {
         console.log("Successful!!!",response);
+        this.loadBooks(this.category);
       },
       error: (error) => {
         console.log("Error occured",error);
       }
     });
+  }
+  //To View
+  onView(index:number){
+    this.title = this.bookList[index].title
+    this.description = this.bookList[index].description;
   }
   
 }

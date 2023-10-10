@@ -4,6 +4,7 @@ import { BookService } from '../services/book.service';
 import { DatePipe } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../../user/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-book-list',
@@ -15,7 +16,10 @@ export class HomeBookListComponent {
   filteredBookList:BookListRequest[]=[];
   url = environment.baseUrl;
   searchText!:string;
-  constructor(private bookService:BookService, public datePipe:DatePipe, private userService:UserService){}
+
+  title!:string;
+  description!:string;
+  constructor(private bookService:BookService, public datePipe:DatePipe, private userService:UserService, private router:Router){}
 
   ngOnInit(): void {
     this.loadBooks();
@@ -36,6 +40,7 @@ export class HomeBookListComponent {
     this.bookService.purchaseBook(bId,uId).subscribe({
       next: (response) => {
         console.log("Successful!!!",response);
+        this.loadBooks();
       },
       error: (error) => {
         console.log("Error occured",error);
@@ -51,5 +56,10 @@ export class HomeBookListComponent {
       bookTitle => bookTitle?.title.toLowerCase().includes(text.toLowerCase())
     );
   }
-
+  //To View
+  onView(index:number){
+    this.title = this.bookList[index].title
+    this.description = this.bookList[index].description;
+  }
+  
 }

@@ -13,6 +13,10 @@
     <div class="col" *ngFor="let book of filteredBookList; let i = index">
       <div class="card">
         <img
+          data-bs-toggle="modal"
+          data-bs-target="#viewModal"
+          (click)="onView(i)"
+          style="cursor: pointer"
           [src]="url + book.imageUrl"
           class="card-img-top img-fluid"
           alt="..."
@@ -34,7 +38,7 @@
           <div class="row">
             <div class="col-md-6">
               <div class="card-body">
-                <p class="card-text">Author</p>
+                <p class="card-text">{{ book.category }}</p>
               </div>
             </div>
             <div class="col-md-6">
@@ -46,6 +50,35 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- For View Modal -->
+<div
+  class="modal fade"
+  id="viewModal"
+  tabindex="-1"
+  aria-labelledby="viewModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="viewModal">{{ title }}</h1>
+      </div>
+      <div class="card" style="width: 100%; min-height: auto">
+        <div class="card-header text-white bg-dark">Description</div>
+        <div class="card-body">
+          <p class="card-text">
+            {{ description }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>

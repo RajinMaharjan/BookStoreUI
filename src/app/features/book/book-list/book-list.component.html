@@ -1,8 +1,98 @@
 <div class="container">
-  <div class="d-flex justify-content-end mt-3">
-    <a [routerLink]="['/home/admin/add-book']" class="btn btn-primary"
-      >Add Book</a
+  <div class="row">
+    <div class="col-md-8">
+      <div class="text-center" style="width: 80%">
+        <input
+          class="form-control me-2 mb-2"
+          type="text"
+          placeholder="Search"
+          #filter
+          [(ngModel)]="searchText"
+          (ngModelChange)="filterResults(filter.value)"
+        />
+      </div>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <div>
+        <a [routerLink]="['/home/admin/add-book']" class="btn btn-primary"
+          >Add Book</a
+        >
+      </div>
+    </div>
+    <p-table
+      [value]="filteredBookList"
+      [paginator]="true"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      responsiveLayout="scroll"
     >
+      <ng-template pTemplate="header">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Category</th>
+          <th scope="col">Author</th>
+          <th scope="col">Year Published</th>
+          <th scope="col">Price</th>
+          <th scope="col">Image</th>
+          <th scope="col">Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-book let-i="index">
+        <tr [ngClass]="{ inActive: book.isActive == false }">
+          <td>{{ book.title }}</td>
+          <td>{{ book.category }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ datePipe.transform(book.yearPublished, "yyyy-MM-dd") }}</td>
+          <td>{{ book.price }}</td>
+          <td
+            data-bs-toggle="modal"
+            data-bs-target="#viewModal"
+            (click)="onView(i)"
+            style="cursor: pointer"
+          >
+            <img [src]="url + book.imageUrl" alt="" srcset="" />
+          </td>
+          <td>
+            <i
+              class="bi bi-pen me-1"
+              style="color: green; font-size: 1.1rem; cursor: pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#editModal"
+              (click)="onEdit(i)"
+            ></i>
+            <i
+              class="bi bi-trash ms-1"
+              style="color: red; font-size: 1.1rem; cursor: pointer"
+              data-bs-toggle="modal"
+              data-bs-target="#deleteModal"
+              (click)="onDelete(i)"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <!-- <div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="mx-auto text-center" style="width: 100%">
+        <input
+          class="form-control me-2 mb-2"
+          type="text"
+          placeholder="Search"
+          #filter
+          [(ngModel)]="searchText"
+          (ngModelChange)="filterResults(filter.value)"
+        />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="d-flex justify-content-end">
+        <a [routerLink]="['/home/admin/add-book']" class="btn btn-primary"
+          >Add Book</a
+        >
+      </div>
+    </div>
   </div>
   <table class="table">
     <thead>
@@ -17,48 +107,52 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of bookList; let i = index">
+      <tr *ngFor="let book of filteredBookList; let i = index">
         <td>{{ book.title }}</td>
         <td>{{ book.category }}</td>
         <td>{{ book.author }}</td>
         <td>{{ datePipe.transform(book.yearPublished, "yyyy-MM-dd") }}</td>
         <td>{{ book.price }}</td>
-        <!-- <td>{{book.imageUrl}}</td> -->
-        <td><img [src]="url + book.imageUrl" alt="" srcset="" /></td>
+        <td
+          data-bs-toggle="modal"
+          data-bs-target="#viewModal"
+          (click)="onView(i)"
+          style="cursor: pointer"
+        >
+          <img [src]="url + book.imageUrl" alt="" srcset="" />
+        </td>
         <td>
-          <button
-            class="btn btn-success me-2 px-4"
+          <i
+            class="bi bi-pen me-1"
+            style="color: green; font-size: 1.1rem; cursor: pointer"
             data-bs-toggle="modal"
             data-bs-target="#editModal"
             (click)="onEdit(i)"
-          >
-            Edit
-          </button>
-          <button
-            class="btn btn-danger"
+          ></i>
+          <i
+            class="bi bi-trash ms-1"
+            style="color: red; font-size: 1.1rem; cursor: pointer"
             data-bs-toggle="modal"
             data-bs-target="#deleteModal"
             (click)="onDelete(i)"
-          >
-            Delete
-          </button>
+          ></i>
         </td>
       </tr>
     </tbody>
   </table>
-</div>
-<!-- For Edit Modal -->
-<div
+</div> -->
+  <!-- For Edit Modal -->
+  <!-- <div
   class="modal fade"
   id="editModal"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="editModal"
   aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Book</h1>
+        <h1 class="modal-title fs-5" id="editModal">Edit Book</h1>
         <button
           type="button"
           class="btn-close"
@@ -139,13 +233,13 @@
 
             <div class="mt-3">
               <label for="description" class="form-label">Description</label>
-              <input
+              <textarea
                 type="text"
                 id="description"
                 class="form-control"
                 name="description"
                 [(ngModel)]="model.description"
-              />
+              ></textarea>
             </div>
           </div>
           <div class="modal-footer">
@@ -168,19 +262,19 @@
       </div>
     </div>
   </div>
-</div>
-<!-- For Deleted Modal -->
-<div
+</div> -->
+  <!-- For Deleted Modal -->
+  <!-- <div
   class="modal fade"
   id="deleteModal"
   tabindex="-1"
-  aria-labelledby="exampleModalLabel"
+  aria-labelledby="deleteModal"
   aria-hidden="true"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Book</h1>
+        <h1 class="modal-title fs-5" id="deleteModal">Delete Book</h1>
         <button
           type="button"
           class="btn-close"
@@ -204,4 +298,37 @@
       </div>
     </div>
   </div>
+</div> -->
+
+  <!-- For View Modal -->
+  <!-- <div
+  class="modal fade"
+  id="viewModal"
+  tabindex="-1"
+  aria-labelledby="viewModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="viewModal">{{ title }}</h1>
+      </div>
+      <div class="card" style="width: 100%; min-height: auto">
+        <div class="card-header text-white bg-dark">Description</div>
+        <div class="card-body">
+          <p class="card-text">
+            {{ description }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+  <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 </div>

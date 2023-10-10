@@ -45,8 +45,7 @@ export class AddBookComponent{
       formData.append('image',this.model.image,this.model.image.name);
     }
     this.uploadFormData(formData);    
-    this.router.navigate(['/home/admin/book-list']);
-    this.redirectTo('/home/admin/book-list');
+    
   }
 
 
@@ -55,6 +54,7 @@ export class AddBookComponent{
     .subscribe({
       next: (response) => {
         console.log("Successful!!!",response);
+        this.router.navigate(['/home/admin/book-list']);
       },
       error: (error) => {
         console.log("Error occured",error);
