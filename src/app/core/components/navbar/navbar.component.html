@@ -1,42 +1,141 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-      <a class="navbar-brand" href="#">Bookstore</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Category
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">A</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">B</a></li>
-            </ul>
-          </li>        
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Admin
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">User List</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" [routerLink]="['/admin/books']">Book List</a></li>
-            </ul>
-          </li>    
-        </ul>
-        <button class="d-flex btn btn-primary" [routerLink]="['/register']">
-          Register
-        </button>
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-0">
+  <div
+    class="container-fluid navbar-light p-2"
+    style="background-color: #e3f2fd"
+  >
+    <a class="navbar-brand" href="#"><i class="bi bi-book"></i></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Category
+          </a>
+          <ul class="dropdown-menu">
+            <li
+              class="cursor-pointer"
+              *ngFor="let category of categoryArray; let i = index"
+            >
+              <button
+                class="dropdown-item cursor-pointer"
+                (click)="routeCategoryPage(i)"
+              >
+                {{ category }}
+              </button>
+              <hr
+                *ngIf="i != categoryArray.length - 1"
+                class="dropdown-divider"
+              />
+            </li>
+          </ul>
+        </li>
+        <li class="mx-3">
+          <i
+            class="bi bi-sort-numeric-down"
+            style="font-size: 1.5rem"
+            (click)="routeToSortByPricePage(true)"
+          ></i>
+        </li>
+        <li class="me-2">
+          <i
+            class="bi bi-sort-numeric-up"
+            style="font-size: 1.5rem"
+            (click)="routeToSortByPricePage(false)"
+          ></i>
+        </li>
+
+        <li class="nav-item dropdown">
+          <button
+            class="nav-link dropdown-toggle"
+            [disabled]="checkRole()"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Admin
+          </button>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLink="/home/admin/user-list"
+                >User List</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" routerLink="/home/admin/book-list"
+                >Book List</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="container-fluid">
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+        </form>
+      </div>
+      <div class="dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{ userData.firstName + " " + userData.lastName }}
+        </a>
+        <ul class="dropdown-menu" style="min-width: auto">
+          <li>
+            <div class="mb-3">
+              <i
+                class="bi bi-box-arrow-in-right btn mx-4 px-4"
+                style="font-size: 1.5rem"
+                (click)="logout()"
+              ></i>
+            </div>
+            <div>
+              <i
+                class="bi bi-person-circle btn mx-4 px-4"
+                style="font-size: 1.5rem"
+                routerLink="/home/user/profile"
+              ></i>
+            </div>
+            <div>
+              <i
+                class="bi bi-shop btn mx-4 px-4"
+                style="font-size: 1.5rem"
+                routerLink="/home/user/purchased-book"
+              ></i>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

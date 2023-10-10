@@ -30,7 +30,7 @@ export class LoginUserComponent {
       console.log(jwtToken.token);
       if(jwtToken.token!=null){
         localStorage.setItem('jwtToken', jwtToken.token);
-        //this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
       }
       
     });

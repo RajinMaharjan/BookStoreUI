@@ -8,4 +8,6 @@ import { UserService } from './features/user/services/user.service';
 })
 export class AppComponent {
   title = 'BookStoreUI';
+  constructor (public userService:UserService){}
+  
 }

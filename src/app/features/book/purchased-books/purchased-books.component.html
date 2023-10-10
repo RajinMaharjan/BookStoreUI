@@ -1,0 +1,25 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Category</th>
+        <th scope="col">Author</th>
+        <th scope="col">Year Published</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of bookList; let i = index">
+        <td>{{ book.title }}</td>
+        <td>{{ book.category }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ datePipe.transform(book.yearPublished, "yyyy-MM-dd") }}</td>
+        <td>{{ book.price }}</td>
+        <!-- <td>{{book.imageUrl}}</td> -->
+        <td><img [src]="url + book.imageUrl" alt="" srcset="" /></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

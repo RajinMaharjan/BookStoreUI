@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import { AddBookRequest } from '../models/add-book-request.model';
 import { BookService } from '../services/book.service';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book',
@@ -21,7 +22,7 @@ export class AddBookComponent{
 
   };
 
-  constructor(private bookService:BookService){}
+  constructor(private bookService:BookService, private router:Router){}
 
   onFileChange(event:any){
     if(event.target.files && event.target.files.length>0){
@@ -43,7 +44,9 @@ export class AddBookComponent{
     if(this.model.image){
       formData.append('image',this.model.image,this.model.image.name);
     }
-    this.uploadFormData(formData);
+    this.uploadFormData(formData);    
+    this.router.navigate(['/home/admin/book-list']);
+    this.redirectTo('/home/admin/book-list');
   }
 
 
@@ -57,5 +60,15 @@ export class AddBookComponent{
         console.log("Error occured",error);
       }
     });
+  }
+
+  redirectTo(uri: string) {
+
+    this.router
+
+      .navigateByUrl('/', { skipLocationChange: true })
+
+      .then(() => this.router.navigate([uri]));
+
   }
 }
