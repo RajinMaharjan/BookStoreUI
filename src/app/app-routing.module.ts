@@ -61,7 +61,8 @@ const routes: Routes = [
     path:'login',
     component: LoginUserComponent,
     canActivate: [isLoggedIn],
-  }
+  },
+  { path: '**', loadChildren: () => import('./core/error/error.module').then((m) => m.ErrorModule) }
 ];
 
 @NgModule({

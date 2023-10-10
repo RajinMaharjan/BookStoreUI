@@ -3,7 +3,6 @@ import { Router } from "@angular/router"
 import { UserService } from "./user.service";
 
 export const authGuard = () => {
-
     const router = inject(Router);  
     const userService = inject(UserService);  
     if (userService.isAuthenticated()) {  

@@ -37,7 +37,7 @@
           <th scope="col">Action</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-book let-i="index">
+      <ng-template pTemplate="body" let-book>
         <tr [ngClass]="{ inActive: book.isActive == false }">
           <td>{{ book.title }}</td>
           <td>{{ book.category }}</td>
@@ -47,7 +47,7 @@
           <td
             data-bs-toggle="modal"
             data-bs-target="#viewModal"
-            (click)="onView(i)"
+            (click)="onView(book)"
             style="cursor: pointer"
           >
             <img [src]="url + book.imageUrl" alt="" srcset="" />
@@ -58,21 +58,22 @@
               style="color: green; font-size: 1.1rem; cursor: pointer"
               data-bs-toggle="modal"
               data-bs-target="#editModal"
-              (click)="onEdit(i)"
+              (click)="onEdit(book)"
             ></i>
             <i
               class="bi bi-trash ms-1"
               style="color: red; font-size: 1.1rem; cursor: pointer"
               data-bs-toggle="modal"
               data-bs-target="#deleteModal"
-              (click)="onDelete(i)"
+              (click)="onDelete(book)"
             ></i>
           </td>
         </tr>
       </ng-template>
     </p-table>
   </div>
-  <!-- <div class="container">
+</div>
+<!-- <div class="container">
   <div class="row">
     <div class="col-md-10">
       <div class="mx-auto text-center" style="width: 100%">
@@ -141,8 +142,8 @@
     </tbody>
   </table>
 </div> -->
-  <!-- For Edit Modal -->
-  <!-- <div
+<!-- For Edit Modal -->
+<div
   class="modal fade"
   id="editModal"
   tabindex="-1"
@@ -262,9 +263,9 @@
       </div>
     </div>
   </div>
-</div> -->
-  <!-- For Deleted Modal -->
-  <!-- <div
+</div>
+<!-- For Deleted Modal -->
+<div
   class="modal fade"
   id="deleteModal"
   tabindex="-1"
@@ -298,10 +299,10 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
-  <!-- For View Modal -->
-  <!-- <div
+<!-- For View Modal -->
+<div
   class="modal fade"
   id="viewModal"
   tabindex="-1"
@@ -328,7 +329,6 @@
       </div>
     </div>
   </div>
-</div> -->
-
-  <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 </div>
+
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////// -->

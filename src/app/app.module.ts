@@ -14,13 +14,15 @@ import { UserInterceptor } from './features/user/services/interceptor';
 import { DatePipe } from '@angular/common';
 import { HomeComponent } from './core/home/home.component';
 import { BookListModule } from './features/book/book-list/book-list.module';
+import { ErrorComponent } from './core/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     RegisterUserComponent,
     LoginUserComponent,
-    HomeComponent
+    HomeComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

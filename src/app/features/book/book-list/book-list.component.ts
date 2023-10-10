@@ -63,21 +63,21 @@ export class BookListComponent implements OnInit{
     description: ''
   };
 
-  onEdit(index:number){
-    this.selectedIndex = index;
-    this.model.title = this.bookList[index].title
-    this.model.category = this.bookList[index].category
-    this.model.author = this.bookList[index].author
-    const dateString = this.bookList[index].yearPublished;
+  onEdit(book:any){
+    this.selectedIndex = this.filteredBookList.indexOf(book);
+    this.model.title = this.bookList[this.selectedIndex].title
+    this.model.category = this.bookList[this.selectedIndex].category
+    this.model.author = this.bookList[this.selectedIndex].author
+    const dateString = this.bookList[this.selectedIndex].yearPublished;
 
     const date = new Date(dateString);
     const formattedDate = date.toISOString().slice(0, 10);
     this.model.yearPublished = new Date(date.toDateString())
-    console.log(this.bookList[index].yearPublished);
+    console.log(this.bookList[this.selectedIndex].yearPublished);
     console.log(formattedDate);
 
-    this.model.price = this.bookList[index].price
-    this.model.description = this.bookList[index].description    
+    this.model.price = this.bookList[this.selectedIndex].price
+    this.model.description = this.bookList[this.selectedIndex].description    
   }
   onFileChange(event:any){
     if(event.target.files && event.target.files.length>0){
@@ -113,8 +113,8 @@ export class BookListComponent implements OnInit{
     });
   }
 // For Deleting Book
-  onDelete(index:number){
-    this.selectedIndex = index;
+  onDelete(book:any){
+    this.selectedIndex = this.filteredBookList.indexOf(book);
   }
 
   onDeleteBook(){
@@ -136,9 +136,10 @@ export class BookListComponent implements OnInit{
   }
 
   //To View
-  onView(index:number){
-    this.title = this.bookList[index].title
-    this.description = this.bookList[index].description;
+  onView(book:any){
+    this.selectedIndex = this.filteredBookList.indexOf(book);
+    this.title = this.bookList[this.selectedIndex ].title
+    this.description = this.bookList[this.selectedIndex ].description;
   }
 
 

@@ -30,6 +30,7 @@ export class CategoryBookListComponent implements OnInit,OnDestroy{
 
   title!:string;
   description!:string;
+  date!:string;
 
   ngOnInit(): void {
 
@@ -85,7 +86,8 @@ export class CategoryBookListComponent implements OnInit,OnDestroy{
   //To View
   onView(index:number){
     this.title = this.bookList[index].title
-    this.description = this.bookList[index].description;
+    this.description = this.bookList[index].description;    
+    this.date = this.bookList[index].yearPublished;
   }
   
 }
