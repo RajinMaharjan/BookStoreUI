@@ -29,22 +29,19 @@ export class RegisterUserComponent implements OnDestroy{
 
 
   register(){
-    try{
-      this.registerUserSubscription = this.userService.registerUser(this.model)
+    this.registerUserSubscription = this.userService.registerUser(this.model)
     .subscribe({
       next: (response) => {
         console.log("Account Created");
         this.router.navigate(['/login']);
 
       },
-      error: (error) => {
-        console.log("Error",error)
-        alert("Registration failed");
+      error: (error)=>{
+        if(error.error.status == "Error"){
+          alert(error.error.message);
+        }
       }
     });
-    }catch(e){
-      console.log(e);
-    }
   }
   ngOnDestroy(): void {
     this.registerUserSubscription?.unsubscribe();

@@ -26,14 +26,20 @@ export class LoginUserComponent {
 
   login(){
     this.userService.loginUser(this.model)
-    .subscribe((jwtToken) => {
+    .subscribe({next:(jwtToken) => {
       console.log(jwtToken.token);
       if(jwtToken.token!=null){
         localStorage.setItem('jwtToken', jwtToken.token);
         this.router.navigate(['/home']);
       }
       
-    });
+    },
+    error:(error)=>{
+      if(error.error.status == "Error"){
+        alert(error.error.message);
+      }
+    }}
+    );
   }
 
   
