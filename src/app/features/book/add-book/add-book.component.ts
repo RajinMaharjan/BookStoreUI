@@ -58,6 +58,7 @@ export class AddBookComponent{
       },
       error: (error) => {
         console.log("Error occured",error);
+        alert(error.error.message);
       }
     });
   }
