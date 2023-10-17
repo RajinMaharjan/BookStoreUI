@@ -109,6 +109,7 @@ export class BookListComponent implements OnInit{
       },
       error: (error) => {
         console.log("Error occured",error);
+        alert(error.error.message);
       }
     });
   }

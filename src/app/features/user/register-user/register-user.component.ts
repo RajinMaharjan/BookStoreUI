@@ -33,6 +33,7 @@ export class RegisterUserComponent implements OnDestroy{
     .subscribe({
       next: (response) => {
         console.log("Account Created");
+        alert("Registration Successfull");
         this.router.navigate(['/login']);
 
       },
